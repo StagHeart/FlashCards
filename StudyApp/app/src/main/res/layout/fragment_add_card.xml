@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:are="http://schemas.android.com/apk/res-auto"
+    android:focusableInTouchMode="true"
+    android:orientation="vertical"
+    android:id="@+id/add_card_layout">
+
+
+    <RelativeLayout
+        android:id="@+id/top_bar"
+        android:layout_width="match_parent"
+        android:layout_height="?android:attr/actionBarSize"
+        android:background="@color/flashcard_grey">
+
+        <RelativeLayout
+            android:id="@+id/cancel_button"
+            android:layout_width="40dp"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginLeft="21dp"
+                android:layout_marginRight="21dp"
+                android:src="@drawable/back_button"
+                android:id="@+id/done_image_view"
+                android:textColor="@color/flashcard_blue_light"
+                are:tint="@color/flashcard_blue_light" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true">
+
+            <TextView
+                android:id="@+id/verse_location_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="Location"
+                android:textSize="20dp"
+                android:fontFamily="FONT/CONFIRMED/Gotham/Gotham-Medium.otf"
+                android:textColor="@color/flashcard_blue_light" />
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/done_button"
+            android:layout_width="80dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true">
+
+            <TextView
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_margin="12dp"
+                android:text="@string/submit"
+                android:tint="@color/flashcard_blue_light"
+                android:clickable="false" />
+
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <View
+        android:id="@+id/line"
+        android:layout_width="match_parent"
+        android:layout_height=".5dp"
+        android:layout_below="@+id/top_bar"
+        android:background="@color/gray_scale_0" />
+
+    <View
+        android:id="@+id/bottom_line"
+        android:layout_width="match_parent"
+        android:layout_height=".5dp"
+        android:layout_above="@+id/rt_edit_scrollview"
+        android:background="@color/gray_scale_0" />
+
+    <ScrollView
+        android:id="@+id/rt_edit_scrollview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/line"
+        android:background="@android:color/white">
+
+        <EditText
+            android:id="@+id/rt_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="top|left"
+            android:hint="Type your note here"
+            android:textColorLink="@color/flashcard_blue_light"
+            android:textSize="20sp" />
+    </ScrollView>
+
+</RelativeLayout>
