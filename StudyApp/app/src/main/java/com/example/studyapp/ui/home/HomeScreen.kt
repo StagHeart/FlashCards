@@ -1,19 +1,11 @@
 package com.example.studyapp.ui.home
 
-
-import android.app.Activity
 import com.example.studyapp.R
-import android.graphics.Typeface.BOLD
-import android.graphics.drawable.Drawable
-import android.graphics.fonts.FontStyle
 import android.util.Log
-import android.view.Gravity
-import android.view.View
 import androidx.compose.animation.*
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
@@ -22,39 +14,25 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.paint
-import androidx.compose.ui.graphics.BlendMode
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.Color.Companion.Blue
-import androidx.compose.ui.graphics.Color.Companion.Green
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.font.FontWeight.Companion.Bold
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import com.example.studyapp.realm.RealmHelper.getFlashCards
 import com.example.studyapp.realm.models.FlashCard
 import com.example.studyapp.realm.models.Trivia
-import com.example.studyapp.realm.realm
-import io.realm.RealmList
 import io.realm.RealmResults
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
-import com.example.studyapp.MainViewModel
 import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.*
 import com.example.studyapp.realm.RealmHelper
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Arrangement.Absolute.Center
-import androidx.compose.foundation.layout.Arrangement.Center
-import androidx.compose.material.FabPosition.Companion.Center
-
 
 @ExperimentalAnimationApi
 @Composable
@@ -88,9 +66,8 @@ fun MainScreenContainer(
     navController: NavController
 ) {
 
-
     Column {
-        TopBar(viewModel)
+        TopBar()
         FlashCardList(viewModel, flashCards, navController)
     }
 
@@ -131,38 +108,6 @@ fun MainScreenContainer(
 
 @ExperimentalAnimationApi
 @Composable
-fun FullCard(answer: String?, question: String?) {
-
-    var isQuestion by remember { mutableStateOf(true) }
-
-    Box(
-        contentAlignment = Alignment.Center,
-    ) {
-        Image(
-            painter = painterResource(R.drawable.paper),
-            contentDescription = null,
-            modifier = Modifier
-                .fillMaxHeight()
-                .fillMaxWidth(),
-            contentScale = ContentScale.Crop
-        )
-
-        Column(
-            modifier = Modifier
-                .clickable { isQuestion = !isQuestion }
-        ) {
-            Text(
-                text = if (isQuestion) "Question:" else "Answer:"
-            )
-            Text(
-                text = if (isQuestion) question.toString() else answer.toString()
-            )
-        }
-    }
-}
-
-@ExperimentalAnimationApi
-@Composable
 fun FlashCardList(
     viewModel: MainViewModel,
     flashCards: RealmResults<FlashCard>,
@@ -183,13 +128,16 @@ fun FlashCardList(
             contentScale = ContentScale.Crop
         )
 
-        LazyColumn {
+
+        LazyColumn(
+            contentPadding = PaddingValues(bottom = 100.dp)
+        ) {
             items(flashCards.size) { index ->
                 val trivia =
                     flashCards[index]?.triviaList?.find { (it as Trivia).language == language }
-                val title = flashCards[index]!!.title!!
+                val title = "${index + 1}."
 
-                FlashCard(title, trivia, onClick = {
+                FlashCard(title, trivia, viewModel, onClick = {
                     Log.e("WES_TEST", "CLICK")
                     navController.navigate("full_card/${trivia!!.question}/${trivia.answer}")
                 })
@@ -199,7 +147,7 @@ fun FlashCardList(
 }
 
 @Composable
-fun TopBar(viewModel: MainViewModel) {
+fun TopBar() {
 
     Surface(
         modifier = Modifier
@@ -213,19 +161,7 @@ fun TopBar(viewModel: MainViewModel) {
                 .fillMaxHeight()
                 .background(Color.LightGray)
 
-        ) {
-
-            Button(
-                modifier = Modifier
-                    .align(Alignment.CenterEnd)
-                    .padding(end = 14.dp),
-                onClick = {
-                    //
-                }
-            ) {
-                Text("Add Card")
-            }
-        }
+        )
     }
 }
 
@@ -273,8 +209,12 @@ fun ScrollBoxes(viewModel: MainViewModel) {
 fun FlashCard(
     title: String,
     trivia: Trivia?,
-    onClick: () -> Unit,
+    viewModel: MainViewModel,
+    onClick: () -> Unit
 ) {
+
+    val language: String by viewModel.language.observeAsState("English")
+
     MaterialTheme {
         Box(
             modifier = Modifier
@@ -321,7 +261,12 @@ fun FlashCard(
                 )
 
                 Text(
-                    text = "Question: ${trivia?.question}",
+
+                    text = if (trivia?.question.isNullOrBlank()) {
+                        "No Question for Language: $language"
+                    } else {
+                        "Question:  ${trivia?.question}"
+                    },
                     modifier = Modifier.padding(start = 4.dp)
                 )
 
@@ -352,7 +297,11 @@ fun FlashCard(
                 )
 
                 Text(
-                    text = "Answer: ${trivia?.answer}",
+                    text = if (trivia?.answer.isNullOrBlank()) {
+                        "No Answer for Language: $language"
+                    } else {
+                        "Answer:  ${trivia?.answer}"
+                    },
                     modifier = Modifier.padding(start = 4.dp),
                     overflow = TextOverflow.Ellipsis
                 )
@@ -378,41 +327,47 @@ fun FlashCard(
                 )
             }
 
-
-//            Text(
-//                "A day wandering through the sandhills " +
-//                        "in Shark Fin Cove, and a few of the " +
-//                        "sights I saw",
-//                style = typography.h6,
-//                maxLines = 2,
-//                overflow = TextOverflow.Ellipsis,
-//                modifier = Modifier
-//                    .fillMaxWidth()
-//                    .fillMaxHeight()
-//                    .padding(16.dp)
-//                    .border(2.dp, MaterialTheme.colors.secondary, shape)
-//                    .background(MaterialTheme.colors.primary, shape)
-//                    .padding(16.dp)
-//            )
-//            Text(
-//                "Davenport, California",
-//                style = typography.body2
-//            )
-//            Text(
-//                "December 2018",
-//                style = typography.body2
-//            )
         }
     }
 }
 
-@Preview(showBackground = true)
+@ExperimentalAnimationApi
 @Composable
-fun DefaultPreview() {
+fun FullCard(question: String?, answer: String?) {
 
-    //  ScrollBoxes()
+    var isQuestion by remember { mutableStateOf(true) }
 
-    // create dummy data
+    Box(
+        contentAlignment = Alignment.Center,
+    ) {
+        Image(
+            painter = painterResource(R.drawable.paper),
+            contentDescription = null,
+            modifier = Modifier
+                .fillMaxHeight()
+                .fillMaxWidth(),
+            contentScale = ContentScale.Crop
+        )
 
-    //  FlashCardList(flashCards = list as RealmResults<FlashCard>, "English")
+        Column(
+            modifier = Modifier
+                .clickable { isQuestion = !isQuestion }
+        ) {
+
+            Text(
+                text = if (isQuestion) "Question:" else "Answer:",
+                fontSize = 30.sp,
+                fontFamily = FontFamily(
+                    Font(R.font.gotham_medium, FontWeight.Bold)
+                )
+            )
+            Text(
+                text = if (isQuestion) question.toString() else answer.toString(),
+                fontSize = 20.sp,
+                fontFamily = FontFamily(
+                    Font(R.font.gotham_medium, FontWeight.Normal)
+                )
+            )
+        }
+    }
 }

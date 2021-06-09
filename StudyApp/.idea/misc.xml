@@ -14,12 +14,31 @@
         <entry key="../../../../layout/compose-model-1622998715164.xml" value="2.0" />
         <entry key="../../../../layout/compose-model-1622999856882.xml" value="0.2934966216216216" />
         <entry key="../../../../layout/compose-model-1623083932667.xml" value="2.0" />
+        <entry key="../../../../layout/compose-model-1623190075647.xml" value="0.1" />
+        <entry key="../../../../layout/compose-model-1623190366254.xml" value="2.0" />
+        <entry key="../../../../layout/compose-model-1623191198516.xml" value="2.0" />
+        <entry key="../../../../layout/compose-model-1623193407450.xml" value="2.0" />
+        <entry key="../../../../layout/compose-model-1623199333916.xml" value="2.0" />
+        <entry key="../../../../layout/compose-model-1623204997632.xml" value="2.0" />
         <entry key="../../../../layout/custom_preview.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.36574074074074076" />
         <entry key="app/src/main/res/drawable/back_button.xml" value="1.7818181818181817" />
+        <entry key="app/src/main/res/drawable/ic_dashboard_black_24dp.xml" value="0.23229166666666667" />
+        <entry key="app/src/main/res/drawable/ic_home_black_24dp.xml" value="0.23229166666666667" />
+        <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.36574074074074076" />
+        <entry key="app/src/main/res/drawable/ic_notifications_black_24dp.xml" value="0.23229166666666667" />
+        <entry key="app/src/main/res/drawable/shape_button.xml" value="0.3731481481481482" />
+        <entry key="app/src/main/res/drawable/shape_dialog_rounded.xml" value="0.3731481481481482" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.157298277425204" />
+        <entry key="app/src/main/res/layout/dialog_submit_or_add_language.xml" value="0.375" />
         <entry key="app/src/main/res/layout/flashcard.xml" value="0.3582427536231884" />
-        <entry key="app/src/main/res/layout/fragment_add_card.xml" value="0.5677083333333334" />
+        <entry key="app/src/main/res/layout/fragment_add_card.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/fragment_dashboard.xml" value="0.384963768115942" />
         <entry key="app/src/main/res/layout/fragment_flash_card.xml" value="0.16953762466001812" />
+        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.384963768115942" />
+        <entry key="app/src/main/res/layout/fragment_notifications.xml" value="0.384963768115942" />
+        <entry key="app/src/main/res/layout/submit_or_add_language.xml" value="0.379981884057971" />
+        <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.33" />
         <entry key="app/src/main/res/menu/menu.xml" value="0.39739583333333334" />
       </map>
     </option>

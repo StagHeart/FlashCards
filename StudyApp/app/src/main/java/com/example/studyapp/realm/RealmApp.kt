@@ -27,8 +27,4 @@ class RealmApp : Application() {
         
         realm = Realm.getDefaultInstance()
     }
-
-
-
-
 }

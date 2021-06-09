@@ -23,4 +23,8 @@
     <color name="gray_scale_6">#ff3b3b3b</color>
     <color name="gray_scale_7">#ff1b1b1b</color>
     <color name="resource_grey">#ebebeb</color>
+
+    <color name="transparent_black">#cf000000</color>
+
+    <color name="gold">#BFB391</color>
 </resources>

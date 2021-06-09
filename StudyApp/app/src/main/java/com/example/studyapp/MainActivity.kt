@@ -1,24 +1,25 @@
 package com.example.studyapp
 
 import android.os.Bundle
-import android.util.Log
-import android.view.Menu
-import android.view.MenuItem
-import androidx.activity.viewModels
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
-import org.intellij.lang.annotations.Language
+import androidx.navigation.findNavController
+import androidx.navigation.ui.setupWithNavController
+import com.example.studyapp.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
-    val viewModel by viewModels<MainViewModel>()
+    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
 
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.fragment_container, FlashCardFragment())
-            .commit()
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        val navView: BottomNavigationView = binding.navView
+
+        val navController = findNavController(R.id.nav_host_fragment_activity_main)
+        navView.setupWithNavController(navController)
     }
 }

@@ -1,108 +1,197 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
 
+    xmlns:are="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:are="http://schemas.android.com/apk/res-auto"
     android:focusableInTouchMode="true"
-    android:orientation="vertical"
-    android:id="@+id/add_card_layout">
-
+    android:orientation="vertical">
 
     <RelativeLayout
-        android:id="@+id/top_bar"
+        android:id="@+id/add_card_layout"
         android:layout_width="match_parent"
-        android:layout_height="?android:attr/actionBarSize"
-        android:background="@color/flashcard_grey">
+        android:layout_height="match_parent">
 
         <RelativeLayout
-            android:id="@+id/cancel_button"
-            android:layout_width="40dp"
-            android:layout_height="match_parent">
+            android:id="@+id/top_bar"
+            android:layout_width="match_parent"
+            android:layout_height="?android:attr/actionBarSize"
+            android:background="@color/flashcard_grey">
 
-            <ImageView
+            <RelativeLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:layout_marginLeft="21dp"
-                android:layout_marginRight="21dp"
-                android:src="@drawable/back_button"
-                android:id="@+id/done_image_view"
-                android:textColor="@color/flashcard_blue_light"
-                are:tint="@color/flashcard_blue_light" />
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true">
 
+                <TextView
+                    android:id="@+id/verse_location_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:fontFamily="@font/gotham_medium"
+                    android:text="Add Card"
+                    android:textColor="@color/flashcard_blue_light"
+                    android:textSize="20dp" />
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/submit_button"
+                android:layout_width="80dp"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginEnd="12dp"
+                    android:layout_marginBottom="12dp"
+                    android:clickable="false"
+                    android:fontFamily="@font/gotham_medium"
+                    android:text="@string/submit"
+                    android:tint="@color/flashcard_blue_light" />
+
+            </RelativeLayout>
+
+            <View
+
+                android:layout_width="match_parent"
+                android:layout_height=".5dp"
+                android:layout_alignParentBottom="true"
+                android:background="@color/gray_scale_7" />
         </RelativeLayout>
 
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_centerInParent="true">
+        <View
+            android:id="@+id/line"
+            android:layout_width="match_parent"
+            android:layout_height=".5dp"
+            android:layout_below="@+id/top_bar"
+            android:background="@color/gray_scale_7" />
 
-            <TextView
-                android:id="@+id/verse_location_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:text="Location"
-                android:textSize="20dp"
-                android:fontFamily="FONT/CONFIRMED/Gotham/Gotham-Medium.otf"
-                android:textColor="@color/flashcard_blue_light" />
-
-
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/done_button"
-            android:layout_width="80dp"
-            android:layout_height="match_parent"
-            android:layout_alignParentRight="true">
-
-            <TextView
-                android:layout_width="18dp"
-                android:layout_height="18dp"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_margin="12dp"
-                android:text="@string/submit"
-                android:tint="@color/flashcard_blue_light"
-                android:clickable="false" />
-
-        </RelativeLayout>
-    </RelativeLayout>
-
-    <View
-        android:id="@+id/line"
-        android:layout_width="match_parent"
-        android:layout_height=".5dp"
-        android:layout_below="@+id/top_bar"
-        android:background="@color/gray_scale_0" />
-
-    <View
-        android:id="@+id/bottom_line"
-        android:layout_width="match_parent"
-        android:layout_height=".5dp"
-        android:layout_above="@+id/rt_edit_scrollview"
-        android:background="@color/gray_scale_0" />
-
-    <ScrollView
-        android:id="@+id/rt_edit_scrollview"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/line"
-        android:background="@android:color/white">
+        <View
+            android:id="@+id/bottom_line"
+            android:layout_width="match_parent"
+            android:layout_height=".5dp"
+            android:layout_above="@+id/edit_text_question"
+            android:background="@color/gray_scale_0" />
 
         <EditText
-            android:id="@+id/rt_edit_text"
+            android:id="@+id/edit_text_question"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="top|left"
-            android:hint="Type your note here"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/line"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:hint="@string/question"
             android:textColorLink="@color/flashcard_blue_light"
             android:textSize="20sp" />
-    </ScrollView>
+
+
+        <EditText
+            android:id="@+id/edit_text_answer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_below="@id/edit_text_question"
+            android:hint="@string/answer"
+            android:textColorLink="@color/flashcard_blue_light"
+            android:textSize="20sp" />
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/dialog_container"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@color/transparent_black"
+        android:visibility="gone">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="260dp"
+            android:layout_centerInParent="true">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:background="@android:color/transparent"
+                android:elevation="2dp">
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/layout_main"
+                android:layout_width="220dp"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_margin="10dp"
+                android:background="@drawable/shape_dialog_rounded"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/text"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:text="@string/card_created"
+                    android:textAlignment="center"
+                    android:textColor="@android:color/black"
+                    android:textSize="18dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/language_text"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="10dp"
+                    android:text="@string/language"
+                    android:textAlignment="center"
+                    android:textColor="@android:color/black"
+                    android:textSize="18dp"
+                    android:textStyle="bold" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/button_confirm_submit"
+                    android:layout_width="180dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="14dp"
+                    android:background="@drawable/shape_button"
+                    android:padding="12dp"
+                    android:text="@string/submit"
+                    android:textAllCaps="false"
+                    android:textColor="@android:color/white" />
+
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/button_add_language"
+                    android:layout_width="180dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="14dp"
+                    android:background="@drawable/shape_button"
+                    android:padding="12dp"
+                    android:text="@string/add_language"
+                    android:textAllCaps="false"
+                    android:textColor="@android:color/white" />
+
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
 
 </RelativeLayout>
